@@ -4,7 +4,7 @@ A simple solver-based inconsistency checker for constraint language described in
 
 # Setup
 
-Assuming you have [opam](https://opam.ocaml.org/doc/Install.html) installed, `$ ./build` creates a new opam switch, installs necessary dependencies, builds the project, and runs inline tests.
+Assuming you have [opam](https://opam.ocaml.org/doc/Install.html) installed, `$ ./build` creates a new opam switch, installs necessary dependencies, builds the project, and runs inline tests.  You may find the tests at the bottom of [incon.ml](src/incon.ml).
 
 # File Structure in `src`
 
@@ -15,7 +15,7 @@ Assuming you have [opam](https://opam.ocaml.org/doc/Install.html) installed, `$ 
 * `incon.ml` describes a decision procedure to check inconsistency of
 constraints, equivalent to `incon` judgment in the paper.  Function
 `trans` turns a constraint (that encodes exhaustiveness checking or
-redundancy checking) into a logical formula.  As a result, checking satisfiability of the formula is equivalent to checking the consistency of the constrain.
+redundancy checking) into a logical formula.  As a result, checking satisfiability of the formula is equivalent to checking the consistency of the constraint.
 
 # Try it yourself!
 
