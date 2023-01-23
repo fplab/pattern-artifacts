@@ -10,4 +10,18 @@ This repo includes artifacts for "Live Pattern Matching with Typed Holes". Speci
 
 - Assuming `opam` is installed, run `$ ./build` under `incon-sat` will build the project and check the tests.
 
+### Docker
+  Alternatively, you may use [Docker](https://docs.docker.com/get-docker/). Note: building dockers may take a while.
+
+- Build and run Agda mechanization
+  ```
+  $ docker build -t pattern-agda agda-mechanization
+  $ docker run pattern-agda # will check proof
+  ```
+- Build and run Exhaustiveness and Redundancy Checker
+  ```
+  $ docker build -t pattern-incon agda-mechanization
+  $ docker run -it pattern-incon # will invoke OCaml toplevel
+  ``` 
+
 Please see the README in each folder for detailed instructions.
