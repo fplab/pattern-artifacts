@@ -4,7 +4,7 @@ A simple solver-based inconsistency checker for constraint language described in
 
 # Setup
 
-Assuming you have [opam](https://opam.ocaml.org/doc/Install.html) installed, `$ ./build` creates a new opam switch, installs necessary dependencies, builds the project, and runs inline tests.  You may find the tests at the bottom of [incon.ml](src/incon.ml).
+Assuming you have [opam](https://opam.ocaml.org/doc/Install.html) installed, `$ ./build` creates a new opam switch, installs necessary dependencies, builds the project, and runs inline tests.  You may find the tests at the bottom of [incon.ml](src/incon.ml), which include examples given in Sec. 2 of the paper.
 
 # File Structure in `src`
 
@@ -24,7 +24,7 @@ Launch ocaml top-level.
 dune utop src
 ```
 
-Within the top-level, bring the functions into scope with `open Incon;;`, and you may check exhaustiveness and redundancy as follows.
+Within the top-level, bring the functions into scope with `open Incon;;`, and you may check exhaustiveness and redundancy as follows. `is_exhaustive` returns `false` iff the argument constraint is necessarily inexhaustive; `is_redundant` returns true iff the first argument constraint is necessarily redundant with respect to the second argument constraint.
 
 - `Inl x` and `Inr ??` may be exhaustive.
 

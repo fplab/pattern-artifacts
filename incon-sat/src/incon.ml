@@ -30,7 +30,6 @@ let list_reduce f = function
   | hd :: tl -> List.fold_left f hd tl
 
 let cor x y = Or (x, y)
-
 let disjunct : t list -> t = list_reduce cor
 
 let%test "exhaustive1" =
@@ -42,13 +41,34 @@ let%test "exhaustive2" =
 let%test "redundant1" = is_redundant (Inl Truth) (Inl Truth) = true
 
 let%test "redundant2" =
-  is_redundant
-    (disjunct [ Num 2; Unknown ])
-    (disjunct [ Num 2; Num 3 ])
-  = false
+  is_redundant (disjunct [ Num 2; Unknown ]) (disjunct [ Num 2; Num 3 ]) = false
 
 let%test "redundant3" =
-  is_redundant
-    (disjunct [ Num 2; Num 3 ])
-    (disjunct [ Num 3; Num 4 ])
+  is_redundant (disjunct [ Num 2; Num 3 ]) (disjunct [ Num 3; Num 4 ]) = false
+
+let%test "fig2(a)" =
+  is_exhaustive (disjunct [ Inl Truth; Inr (Pair (Truth, Unknown)) ]) = true
+
+let%test "fig2(b)" =
+  is_exhaustive
+    (disjunct [ Inl Truth; Inr (Pair (Truth, Inr (Pair (Unknown, Unknown)))) ])
   = false
+
+let%test "fig2(c)" =
+  is_exhaustive
+    (disjunct
+       [ Inl Truth; Inr (Pair (Truth, Unknown)); Inr (Pair (Truth, Truth)) ])
+  = true
+
+let%test "fig3(a)" =
+  is_redundant (Inl Truth) (Inr (Pair (Truth, Unknown)))
+  || is_redundant
+       (Inr (Pair (Truth, Inr (Pair (Truth, Truth)))))
+       (disjunct [ Inl Truth; Inr (Pair (Truth, Unknown)) ])
+     = false
+
+let%test "fig3(b)" =
+  is_redundant
+    (Inr (Pair (Truth, Unknown)))
+    (disjunct [ Inl Truth; Inr (Pair (Truth, Truth)) ])
+  = true
